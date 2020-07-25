@@ -1,5 +1,5 @@
 {
-  "name": "backend_pm2",
+  "name": "@pm2painel/server",
   "version": "0.1.6",
   "main": "src/server.ts",
   "repository": "git@github.com:marconwillian/Pm2Panel_backend.git",
