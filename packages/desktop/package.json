@@ -1,0 +1,9 @@
+{
+  "name": "@pm2painel/desktop",
+  "version": "0.0.1",
+  "main": "main.js",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^9.1.1"
+  }
+}
