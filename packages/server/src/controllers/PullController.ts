@@ -1,7 +1,9 @@
+import {Request, Response} from 'express';
 import pm2 from 'pm2';
 
 const PullController = {
-    index: (req, res) => {
+    index: async (req: Request, res: Response) => {
+        /*
         pm2.pullAndReload('server', function(err, meta) {
             if (meta) {
   
@@ -12,6 +14,7 @@ const PullController = {
               console.log('App %s already at latest version', 'server');
               res.status(201).json();
           });
+        */
     }
 }
 
