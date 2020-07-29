@@ -44,6 +44,45 @@ const ProcessController = {
             status: process[0].status
         });
     },
+    restart: async (req: Request, res: Response) => {
+        
+        let processId: number = parseInt(req.params.id);
+
+        pm2.restart(processId, (err, describe) => {
+            if (err) {
+                console.warn('PM2 list error', err);
+                return res.status(401).json({});
+            };
+            return res.status(200).json({processId});
+        })
+
+    },
+    start: async (req: Request, res: Response) => {
+        
+        let processId: number = parseInt(req.params.id);
+
+        pm2.restart(processId, (err, describe) => {
+            if (err) {
+                console.warn('PM2 list error', err);
+                return res.status(401).json({});
+            };
+            return res.status(200).json({processId});
+        })
+
+    },
+    stop: async (req: Request, res: Response) => {
+        
+        let processId: number = parseInt(req.params.id);
+
+        pm2.stop(processId, (err, describe) => {
+            if (err) {
+                console.warn('PM2 list error', err);
+                return res.status(401).json({});
+            };
+            return res.status(200).json({processId});
+        })
+
+    },
 }
 
 export default ProcessController;
