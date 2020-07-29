@@ -5,7 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PM2 - Painel</title>
 </head>
-<body>
-    <h1>Hello World!</h1>
+<body style="background: #fff">
+    <h1>Lista de Process! Intervalo de Update 30 segundos</h1>
+    <ul></ul>
+    <script>
+        const App  = require('./js/index');
+
+        setInterval(App.default.start, 30000)
+    </script>
 </body>
 </html>

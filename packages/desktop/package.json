@@ -1,8 +1,8 @@
 {
   "name": "@pm2painel/desktop",
-  "version": "0.0.2",
-  "main": "main.ts",
-  "license": "MIT",
+  "version": "0.0.3",
+  "main": "main.js",
+  "license": "AGPL-3.0",
   "devDependencies": {
     "@types/electron": "^1.6.10",
     "electron": "^9.1.1"
