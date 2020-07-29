@@ -6,12 +6,36 @@
     <title>PM2 - Painel</title>
 </head>
 <body style="background: #fff">
-    <h1>Lista de Process! Intervalo de Update 30 segundos</h1>
+    <h1>Lista de Process!</h1>
+    <div>
+        <span>Intervalo de Update em segundos</span>
+        <input type="number" name="update-input" id="update-input" value="30">
+        <button id="update-set" onclick="updateInterval()">Editar</button>
+    </div>
     <ul></ul>
     <script>
         const App  = require('./js/index');
 
-        setInterval(App.default.start, 30000)
+        let update = setInterval(App.default.start, 30000);
+
+        if(localStorage.getItem('time')){
+            let lastTime = localStorage.getItem('time');
+            document.getElementById('update-input').value = lastTime;
+
+            clearInterval(update);
+            update = setInterval(App.default.start, lastTime*1000);
+        }
+        
+
+        const updateInterval = () => {
+            let newTime = document.getElementById('update-input').value;
+            localStorage.setItem('time', newTime)
+
+            clearInterval(update);
+
+            update = setInterval(App.default.start, newTime*1000);
+        }
+        App.default.start()
     </script>
 </body>
 </html>
