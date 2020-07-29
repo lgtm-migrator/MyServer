@@ -1,12 +1,12 @@
 {
   "name": "@pm2painel/server",
-  "version": "0.3.1",
+  "version": "0.3.4",
   "main": "src/server.ts",
   "repository": "git@github.com:marconwillian/Pm2Panel_backend.git",
   "author": "Marcon Willian <marconwillian@protonmail.com>",
   "license": "AGPL-3.0",
   "scripts": {
-    "dev": "ts-node index.ts"
+    "dev": "ts-node-dev index.ts"
   },
   "dependencies": {
     "@sendgrid/mail": "^7.2.1",
