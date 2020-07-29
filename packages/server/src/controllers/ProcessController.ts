@@ -50,7 +50,6 @@ const ProcessController = {
 
         pm2.restart(processId, (err, describe) => {
             if (err) {
-                console.warn('PM2 list error', err);
                 return res.status(401).json({});
             };
             return res.status(200).json({processId});
@@ -63,7 +62,6 @@ const ProcessController = {
 
         pm2.restart(processId, (err, describe) => {
             if (err) {
-                console.warn('PM2 list error', err);
                 return res.status(401).json({});
             };
             return res.status(200).json({processId});
@@ -76,7 +74,6 @@ const ProcessController = {
 
         pm2.stop(processId, (err, describe) => {
             if (err) {
-                console.warn('PM2 list error', err);
                 return res.status(401).json({});
             };
             return res.status(200).json({processId});

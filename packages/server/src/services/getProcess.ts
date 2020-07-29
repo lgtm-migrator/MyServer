@@ -9,6 +9,7 @@ interface Pm2Env {
     restart_time: string;
     status: string;
     axm_monitor: string;
+    pm_uptime: number
 }
 
 interface Monit {
@@ -25,8 +26,9 @@ export interface Process {
     unstable_restarts?: string,
     restart_time?: string,
     pm_id?: number,
-    monit?: Monit
-    axm_monitor?: string
+    monit?: Monit,
+    axm_monitor?: string,
+    pm_uptime?: number
 }
 
 const getProcess = (processId: number | undefined = undefined) => {
@@ -45,8 +47,8 @@ const getProcess = (processId: number | undefined = undefined) => {
                     
     
                     if(process.pm2_env){
-                        const {node_version, versioning, version, unstable_restarts, restart_time, status, axm_monitor} = (process.pm2_env as unknown) as Pm2Env;
-                        return {pm_id, monit, pid, name, status, node_version, versioning, version, unstable_restarts, restart_time, axm_monitor};
+                        const {node_version, versioning, version, unstable_restarts, restart_time, status, axm_monitor, pm_uptime} = (process.pm2_env as unknown) as Pm2Env;
+                        return {pm_id, monit, pid, name, status, node_version, versioning, version, unstable_restarts, restart_time, axm_monitor, pm_uptime};
                     } else {
                         return {pm_id, monit, pid, name, status};
                     }
@@ -61,15 +63,14 @@ const getProcess = (processId: number | undefined = undefined) => {
                     console.warn('PM2 list error', err);
                     reject(err);
                 };
-    
                 const listProcess: Array<Process> = processDescriptionList.map(process => {
     
                     const {pm_id, monit, pid, name} = process;
                     
     
                     if(process.pm2_env){
-                        const {node_version, versioning, version, unstable_restarts, restart_time, status, axm_monitor} = (process.pm2_env as unknown) as Pm2Env;
-                        return {pm_id, monit, pid, name, status, node_version, versioning, version, unstable_restarts, restart_time, axm_monitor};
+                        const {node_version, versioning, version, unstable_restarts, restart_time, status, axm_monitor, pm_uptime} = (process.pm2_env as unknown) as Pm2Env;
+                        return {pm_id, monit, pid, name, status, node_version, versioning, version, unstable_restarts, restart_time, axm_monitor, pm_uptime};
                     } else {
                         return {pm_id, monit, pid, name, status};
                     }
