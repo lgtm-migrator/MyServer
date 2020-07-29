@@ -1,4 +1,4 @@
-const {app, BrowserWindow } = require('electron');
+import {app, BrowserWindow } from 'electron';
 
 let win;
 
@@ -24,7 +24,7 @@ app.on('window-all-closed', () => {
 });
 
 app.on('activate', () => {
-    if(BrowserWindow.getActiveWindow().length===0){
+    if(BrowserWindow.getAllWindows().length===0){
         startApp()
     }
 })
