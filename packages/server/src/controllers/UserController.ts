@@ -35,7 +35,7 @@ const UserController = {
                     .insert({...userContent, type: '3'});
 
                 delete userContent.password;
-                res.status(200).json({user: {id, ...userContent, type: 2}, token: generateToken({id, user: userContent.user, type: userContent.type})});
+                res.status(200).json({user: {id, ...userContent, type: 3}, token: generateToken({id, user: userContent.user, type: userContent.type})});
 
             } catch (err) {
                 return res.status(400).json({statusCode: 400, error: 'Bad Request', message: err.message})
@@ -51,8 +51,8 @@ const UserController = {
             if(!userContent)
                 return res.status(400).json({statusCode: 400, error: "Bad Request", message: "user not found", validation: { source: "body", keys: [ "user"]}})
             
-            if(userContent.type!=='3')
-                return res.status(403).json({statusCode: 403, error: "Forbidden", message: "user don't validate for admin", validation: { keys: [ "type"]}})
+            //if(userContent.type!=='3')
+            //    return res.status(403).json({statusCode: 403, error: "Forbidden", message: "user don't validate for admin", validation: { keys: [ "type"]}})
             
             if(!await bcrypt.compare(password, userContent.password))
                 return res.status(403).json({statusCode: 403, error: "Forbidden", message: "access denied", validation: { source: "body", keys: [ "password"]}})

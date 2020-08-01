@@ -4,14 +4,14 @@ const UserValidator = {
 	register: celebrate({
 		[Segments.BODY]: Joi.object().keys({
 			email: Joi.string().email().required(),
-			user: Joi.number().required(),
+			user: Joi.string().required(),
 			name: Joi.string().required(),
 			password: Joi.string().required()
 		})
 	}),
 	auth: celebrate({
 		[Segments.BODY]: Joi.object().keys({
-			email: Joi.string().required(),
+			user: Joi.string().required(),
 			password: Joi.string().required()
 		})
 	}),

@@ -2,15 +2,21 @@
 //https://github.com/rconjoe/pm2panel/blob/master/pm2panel.js
 
 import express from 'express';
+import http from 'http';
 import cors from 'cors';
+
 import dotenv from 'dotenv';
+dotenv.config();
 
-import getProcessPM2, {Process} from './services/getProcess';
 
-import connection from './database/connection';
+import socker from './socker';
 
 const app = express();
-dotenv.config();
+const port = process.env.PORT || 4404;
+app.set("port", port);
+
+let server = new http.Server(app);
+socker(server);
 
 app.use(cors());
 app.use(express.json());
@@ -18,10 +24,9 @@ app.use(express.json());
 import routes from './Routes';
 routes(app)
 
-const port = process.env.PORT || 4404;
 
 export default async () => {
-    app.listen(port, () => {
-        console.log(`HTTP server is listening on :${port}`);
+    server.listen(port, function() {
+      console.log(`listening on *:${port}`);
     });
 }
