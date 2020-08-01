@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PM2 - Painel</title>
 </head>
-<body style="background: #fff">
+<body style="background: #fff; border: 0px; margin: 0px;">
+    <div style="width: 100%; height: 30px; background: yellow; -webkit-app-region: drag"></div>
     <h1>Lista de Process!</h1>
     <div>
         <span>Intervalo de Update em segundos</span>
@@ -13,29 +14,49 @@
         <button id="update-set" onclick="updateInterval()">Editar</button>
     </div>
     <ul></ul>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
     <script>
+        const socket = io("http://localhost:55000", {
+            path: '/socket/process'
+        });
+
+        socket.on("process", function(data) {
+            console.log(data);
+            socket.emit("process:list");
+        });
+
+        
         const App  = require('./js/index');
 
-        let update = setInterval(App.default.start, 30000);
+        function start(process){
+            socket.emit("process:start", process);
+        }
+        function stop(process){
+            socket.emit("process:stop", process);
+        }
+        function restart(process){
+            socket.emit("process:restart", process);
+        }
+
+        socket.on("process:list", function(data) {
+            console.log(App.list(data));
+        })
 
         if(localStorage.getItem('time')){
             let lastTime = localStorage.getItem('time');
             document.getElementById('update-input').value = lastTime;
 
-            clearInterval(update);
-            update = setInterval(App.default.start, lastTime*1000);
+            socket.emit("process:setTime", lastTime);
         }
-        
 
         const updateInterval = () => {
             let newTime = document.getElementById('update-input').value;
             localStorage.setItem('time', newTime)
 
-            clearInterval(update);
-
-            update = setInterval(App.default.start, newTime*1000);
+            socket.emit("process:setTime", newTime);
         }
-        App.default.start()
+
+        socket.emit("process:list");
     </script>
 </body>
 </html>
