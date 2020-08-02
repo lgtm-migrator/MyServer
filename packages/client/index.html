@@ -19,7 +19,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
     <script src="./script.js"></script>
     <script>
-        const socket = io("http://localhost:55000", {
+        let socket = io("http://localhost:55000", {
             path: '/socket/process'
         });
 
@@ -37,6 +37,9 @@
         }
         function restart(process){
             socket.emit("process:restart", process);
+        }
+        function deleteProcess(process){
+            socket.emit("process:delete", process);
         }
 
         socket.on("process:list", function(data) {
