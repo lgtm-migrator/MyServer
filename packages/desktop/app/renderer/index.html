@@ -37,6 +37,9 @@
         function restart(process){
             socket.emit("process:restart", process);
         }
+        function deleteProcess(process){
+            socket.emit("process:delete", process);
+        }
 
         socket.on("process:list", function(data) {
             console.log(App.list(data));

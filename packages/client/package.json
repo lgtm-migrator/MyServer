@@ -1,6 +1,6 @@
 {
   "name": "@pm2painel/client",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "main": "index.js",
   "license": "AGPL-3.0"
 }
