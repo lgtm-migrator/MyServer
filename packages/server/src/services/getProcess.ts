@@ -8,7 +8,7 @@ interface Pm2Env {
     unstable_restarts: string;
     restart_time: string;
     status: string;
-    axm_monitor: string;
+    axm_monitor: AxmMonitor;
     pm_uptime: number
 }
 
@@ -16,6 +16,20 @@ interface Monit {
     memory?: number,
     cpu?: number
 }
+
+interface AxmMonitor {
+    'Heap Size'?: any,
+    'Heap Usage'?: any,
+    'Used Heap Size'?: any,
+    'Active requests'?: any,
+    'Active handles'?: any,
+    'Event Loop Latency'?: any,
+    'Event Loop Latency p95'?: any,
+    'HTTP Mean Latency'?: any,
+    'HTTP P95 Latency'?: any,
+    'HTTP'?: any
+}
+
 export interface Process {
     pid?: number,
     status: string
@@ -27,7 +41,7 @@ export interface Process {
     restart_time?: string,
     pm_id?: number,
     monit?: Monit,
-    axm_monitor?: string,
+    axm_monitor?: AxmMonitor,
     pm_uptime?: number
 }
 

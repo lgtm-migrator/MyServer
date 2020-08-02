@@ -1,4 +1,3 @@
-import {Request, Response} from 'express';
 import pm2, {ProcessDescription} from 'pm2';
 
 import getProcess, {Process} from '../services/getProcess';
