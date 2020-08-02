@@ -4,9 +4,11 @@ const routes = express.Router();
 import UserController from '../controllers/UserController';
 import UserValidator from '../validator/UserValidator';
 
-import middlewares from '../middlewares/auth';
+import {authMiddlewaresExpress as middlewares} from '../middlewares/auth';
 
 routes.get('/', middlewares, UserController.index);
+routes.post('/approve/:user', middlewares, UserController.approve);
+
 routes.post('/authenticate', UserValidator.auth, UserController.auth);
 routes.post('/register', UserValidator.register, UserController.register);
 

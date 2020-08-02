@@ -17,7 +17,7 @@ interface UserAuthenticate extends DecodeOptions {
     type: String;
 }
 
-const authMiddlewares = (req: RequestAuth, res: Response, next: NextFunction) => {
+export const authMiddlewaresExpress = (req: RequestAuth, res: Response, next: NextFunction) => {
     const authHeader = req.headers.authorization;
     
 
@@ -42,5 +42,3 @@ const authMiddlewares = (req: RequestAuth, res: Response, next: NextFunction) =>
         return next();
     })
 };
-
-export default authMiddlewares;

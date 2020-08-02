@@ -5,7 +5,7 @@ import PullController from '../controllers/PullController';
 
 import UserRoute from './UserRoute';
 
-import middlewares from '../middlewares/auth';
+import {authMiddlewaresExpress as middlewares} from '../middlewares/auth';
 
 export default (app: Express) => {
     app.use('/user', UserRoute);

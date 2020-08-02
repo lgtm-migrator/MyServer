@@ -13,13 +13,21 @@ const UserController = {
     index: async (req: RequestAuth, res: Response) => {
         try {
             authorizationUserIsAdmin(req, res);
-    
-            const users = await connection('users');
-    
+            
+            const users = await connection('users')
+                .select('id')
+                .select('user')
+                .select('email')
+                .select('name')
+                .select('type');
+            
             return res.status(200).json(users)
         } catch (err) {
             return res.status(400).json({statusCode: 400, error: 'Bad Request', message: err.message});
         }
+    },
+    approve: async (req: RequestAuth, res: Response) => {
+        
     },
     register: async (req: Request, res: Response) => {
         const userContent = req.body,
@@ -28,15 +36,14 @@ const UserController = {
                 if((await connection('users').where({user})).length!==0)
                     return res.status(400).json({statusCode: 400, error: "Bad Request", message: "\"user\" already in use", validation: { source: "body", keys: [ "user"]}})
 
-                    userContent.password = await bcrypt.hash(userContent.password, 10);
+                userContent.password = await bcrypt.hash(userContent.password, 10);
+                userContent.type = 3;
 
-                let id: StringConstructor;
-                [id] = await connection('users')
-                    .insert({...userContent, type: '3'});
+                let [id]: StringConstructor[] = await connection('users')
+                    .insert({...userContent});
 
                 delete userContent.password;
-                res.status(200).json({user: {id, ...userContent, type: 3}, token: generateToken({id, user: userContent.user, type: userContent.type})});
-
+                res.status(200).json({user: {id, ...userContent}});
             } catch (err) {
                 return res.status(400).json({statusCode: 400, error: 'Bad Request', message: err.message})
             }
@@ -51,15 +58,15 @@ const UserController = {
             if(!userContent)
                 return res.status(400).json({statusCode: 400, error: "Bad Request", message: "user not found", validation: { source: "body", keys: [ "user"]}})
             
-            //if(userContent.type!=='3')
-            //    return res.status(403).json({statusCode: 403, error: "Forbidden", message: "user don't validate for admin", validation: { keys: [ "type"]}})
+            if(userContent.type!=='3')
+                return res.status(403).json({statusCode: 403, error: "Forbidden", message: "user don't approved for admin", validation: { keys: [ "type"]}})
             
             if(!await bcrypt.compare(password, userContent.password))
                 return res.status(403).json({statusCode: 403, error: "Forbidden", message: "access denied", validation: { source: "body", keys: [ "password"]}})
             
             delete userContent.password;
 
-            res.status(200).json({user: {...userContent}, token: generateToken({id: userContent.id, user: userContent.user, type: userContent.type})});
+            res.status(200).json({user: userContent, token: generateToken({id: userContent.id, user: userContent.user, type: userContent.type})});
         } catch (err) {
             return res.status(400).json({statusCode: 400, error: 'Bad Request', message: err.message})
         }
@@ -123,10 +130,10 @@ const UserController = {
             let trx = await connection.transaction();
 
             await trx('user')
-            .where('id', resetPassword.idUser)
-            .update({
-                password: hash
-            });
+                .where('id', resetPassword.idUser)
+                .update({
+                    password: hash
+                });
 
             const userContent = await trx('user')
                 .where('id', resetPassword.idUser)
@@ -141,7 +148,7 @@ const UserController = {
 
             delete userContent.password;
 
-            res.status(200).json({user: {...userContent}, token: generateToken({id: userContent.id, user: userContent.user, type: userContent.type})});
+            res.status(200).json({user: userContent, token: generateToken({id: userContent.id, user: userContent.user, type: userContent.type})});
         } catch (err) {
 			return res.status(400).json({statusCode: 400, error: 'Bad Request', message: err.message})
         }
