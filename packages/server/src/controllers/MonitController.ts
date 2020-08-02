@@ -1,7 +1,7 @@
 import getProcess, {Process} from '../services/getProcess';
 
-const ProcessController = {
-    monitItem: (processId: number) => {
+const MonitController = {
+    item: (processId: number) => {
         return new Promise(async (resolve, reject)=> {
 
             let process: Process[] = await getProcess(processId) as Process[];
@@ -89,5 +89,5 @@ const ProcessController = {
     }
 }
 
-export default ProcessController;
+export default MonitController;
 
