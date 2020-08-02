@@ -9,7 +9,7 @@ const MonitSocker = (server: Server) => {
     console.log('Started monit listening!');
 
     io.on("connection", function(socket: any) {
-        console.log("a user connected on monit");        
+        console.log("a user connected on monit");
     });
 }
 
