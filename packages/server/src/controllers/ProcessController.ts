@@ -81,6 +81,20 @@ const ProcessController = {
         })
 
     },
+    delete: (processId: number) => {
+        return new Promise(async (resolve, reject)=> {
+            /**
+             * @todo add auth for admin only
+            */
+            pm2.delete(processId, (err, describe) => {
+                if (err) {
+                    resolve({});
+                };
+                resolve({processId});
+            })
+        })
+
+    },
 }
 
 export default ProcessController;

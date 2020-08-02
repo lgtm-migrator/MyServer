@@ -11,7 +11,11 @@ const ProcessSocker = (server: Server) => {
 
     io.on("connection", function(socket: Socket) {
 
-        console.log("a user connected");
+        console.info(`Client entrou [id=${socket.id}]`);
+
+        socket.on("disconnect", () => {
+            console.info(`Client saiu [id=${socket.id}]`);
+        });
 
         let update = setInterval(async ()=>{
             socket.emit("process:list", await ProcessController.index());
@@ -40,6 +44,11 @@ const ProcessSocker = (server: Server) => {
         });
         socket.on("process:restart", async function(processId: number) {
             socket.emit("process:restart", await ProcessController.restart(processId));
+            socket.broadcast.emit("process:list", await ProcessController.index());
+            socket.emit("process:list", await ProcessController.index());
+        });
+        socket.on("process:delete", async function(processId: number) {
+            socket.emit("process:delete", await ProcessController.delete(processId));
             socket.broadcast.emit("process:list", await ProcessController.index());
             socket.emit("process:list", await ProcessController.index());
         });
