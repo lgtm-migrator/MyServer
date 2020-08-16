@@ -22,6 +22,7 @@
         let socket = io("http://localhost:55000", {
             path: '/socket/process'
         });
+        //eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoxLCJpYXQiOjE1OTc1Nzc3NDcsImV4cCI6MTU5NzY2NDE0N30.m0mkDMJZlf1EpJ6DBH-gJtidCYiaWfbPvz8uibjlur4
 
         socket.on("process", function(data) {
             console.log(data);
