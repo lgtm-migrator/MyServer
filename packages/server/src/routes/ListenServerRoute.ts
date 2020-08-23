@@ -1,21 +1,19 @@
 import { Router } from 'express';
 
+import ListenServerController from '../controller/ListenServerController';
+
 const ListenServer = Router();
 
-ListenServer.get('/', (req, res) => {
-    res.json({message: 'List Server'})
-});
+ListenServer.get('/', ListenServerController.index);
 
-ListenServer.post('/', (req, res) => {
-    res.json({message: 'Create Server'})
-});
+ListenServer.post('/', ListenServerController.create);
 
-ListenServer.put('/:id/', (req, res) => {
-    res.json({message: 'Edit Server'})
-});
+ListenServer.put('/:id/', ListenServerController.edit);
 
-ListenServer.delete('/:id/', (req, res) => {
-    res.json({message: 'Delete Server'})
-});
+ListenServer.delete('/:id/', ListenServerController.delete);
+
+ListenServer.get('/:id/auth', ListenServerController.auth);
+
+ListenServer.get('/:id/monit', ListenServerController.monit);
 
 export default ListenServer;
