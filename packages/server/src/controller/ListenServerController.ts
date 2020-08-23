@@ -1,19 +1,33 @@
 import { Request, Response } from 'express';
+import connection from '../database/connection';
 
 export default {
     index: async (req: Request, res: Response) => {
-        res.json({message: 'List Server'});
+        let listServersListens = await connection('servers_listen');
+        res.json(listServersListens);
     },
     create: async (req: Request, res: Response) => {
-        let body = req.body;
+        let { name, endpoint, token } = req.body;
 
-        res.json({message: 'Create Server', body});
+        const [id] = await connection('servers_listen')
+            .insert({
+                name,
+                endpoint,
+                token
+            });
+
+        res.json({ id, name, endpoint, status: true });
     },
     edit: async (req: Request, res: Response) => {
         res.json({message: 'Edit Server'});
     },
     delete: async (req: Request, res: Response) => {
-        res.json({message: 'Delete Server'});
+        let { id } = req.params;
+        await connection('servers_listen')
+            .where({id})
+            .delete();
+
+        res.status(204).send();
     },
     auth: async (req: Request, res: Response) => {
         res.json({message: 'Auth Server'});
