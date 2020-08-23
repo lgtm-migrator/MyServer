@@ -1,0 +1,49 @@
+@baseUrl = http://localhost:3007
+@contentType = application/json
+
+
+# @name ServerListen_List
+get {{baseUrl}}/server/listen
+
+
+###
+
+# @name ServerListen_Add
+post {{baseUrl}}/server/listen/ HTTP/1.1
+Content-Type: {{contentType}}
+
+{
+    "name": "Marcon Willian",
+    "endpoint": "http://localhost:3000",
+    "password": "ServerPass"
+}
+
+
+###
+
+# @name ServerListen_Edit
+put {{baseUrl}}/server/listen/1 HTTP/1.1
+Content-Type: {{contentType}}
+
+{
+    "name": "Marcon Willian",
+    "endpoint": "http://localhost:3000",
+    "password": "ServerPass"
+}
+
+
+###
+
+# @name ServerListen_Delete
+delete {{baseUrl}}/server/listen/1
+
+
+###
+# @name ServerListen_Auth
+get {{baseUrl}}/server/listen/1/auth
+
+
+###
+
+# @name ServerListen_Monit
+get {{baseUrl}}/server/listen/1/monit
