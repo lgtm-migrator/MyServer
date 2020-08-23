@@ -19,13 +19,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
     <script src="./script.js"></script>
     <script>
-        let socket = io("http://localhost:55000", {
+        let socket = io("http://localhost:3010", {
             path: '/socket/process',
             query: {
-                token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoxLCJpYXQiOjE1OTc1Nzc3NDcsImV4cCI6MTU5NzY2NDE0N30.m0mkDMJZlf1EpJ6DBH-gJtidCYiaWfbPvz8uibjlur4'
+                token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoxLCJpYXQiOjE1OTgyMjY1MjgsImV4cCI6MTU5ODIzMDEyOH0.4ifFjVud4raRiYQAyMVU7F6reB2wXJu9JidwSKePKD4'
             }
         });
-        //eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoxLCJpYXQiOjE1OTc1Nzc3NDcsImV4cCI6MTU5NzY2NDE0N30.m0mkDMJZlf1EpJ6DBH-gJtidCYiaWfbPvz8uibjlur4
 
         socket.on("process", function(data) {
             console.log(data);

@@ -13,9 +13,9 @@ post {{baseUrl}}/server/listen/ HTTP/1.1
 Content-Type: {{contentType}}
 
 {
-    "name": "Lucy",
-    "endpoint": "http://lucy-server.mh4sh.dev",
-    "token": "ServerPass"
+    "name": "Localhost",
+    "endpoint": "http://localhost:3010",
+    "token": "iJHGBaia&*87aJHgja!jhgAi9Au89ah(uyAh98HA)"
 }
 
 
@@ -35,12 +35,12 @@ Content-Type: {{contentType}}
 ###
 
 # @name ServerListen_Delete
-delete {{baseUrl}}/server/listen/1
+delete {{baseUrl}}/server/listen/2
 
 
 ###
 # @name ServerListen_Auth
-get {{baseUrl}}/server/listen/1/auth
+get {{baseUrl}}/server/listen/3/auth
 
 
 ###

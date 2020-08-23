@@ -1,5 +1,7 @@
 import { Request, Response } from 'express';
 import connection from '../database/connection';
+import generateToken from '../utils/generateToken';
+
 
 export default {
     index: async (req: Request, res: Response) => {
@@ -23,6 +25,7 @@ export default {
     },
     delete: async (req: Request, res: Response) => {
         let { id } = req.params;
+
         await connection('servers_listen')
             .where({id})
             .delete();
@@ -30,7 +33,19 @@ export default {
         res.status(204).send();
     },
     auth: async (req: Request, res: Response) => {
-        res.json({message: 'Auth Server'});
+        let { id } = req.params;
+
+        let serverListen = await connection('servers_listen')
+            .where({id})
+            .first();
+
+        let params = {
+            type: 1
+        }
+
+        serverListen.token = generateToken(params, 3600, serverListen.token);
+
+        res.json(serverListen);
     },
     monit: async (req: Request, res: Response) => {
         res.json({message: 'Monit Server'})
