@@ -1,0 +1,30 @@
+@baseUrl = http://localhost:3007
+
+post {{baseUrl}}/server/listen HTTP/1.1
+Authorization: Basic user:passwd
+Content-Type: application/json
+
+{
+    "name": "Marcon Willian"
+}
+
+
+###
+
+get {{baseUrl}}/server/listen
+
+
+###
+
+put {{baseUrl}}/server/listen/1 HTTP/1.1
+Authorization: Basic user:passwd
+Content-Type: application/json
+
+{
+    "name": "Marcon Willian"
+}
+
+
+###
+
+delete {{baseUrl}}/server/listen/1
