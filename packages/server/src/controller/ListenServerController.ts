@@ -5,8 +5,10 @@ import generateToken from '../utils/generateToken';
 
 export default {
     index: async (req: Request, res: Response) => {
-        let listServersListens = await connection('servers_listen');
-        res.json(listServersListens);
+        let listServersListens = await connection('servers_listen')
+            .select('id', 'name', 'endpoint', 'status');
+
+        return res.json(listServersListens);
     },
     create: async (req: Request, res: Response) => {
         let { name, endpoint, token } = req.body;
@@ -15,13 +17,21 @@ export default {
             .insert({
                 name,
                 endpoint,
-                token
+                token,
+                status: true
             });
 
         res.json({ id, name, endpoint, status: true });
     },
     edit: async (req: Request, res: Response) => {
-        res.json({message: 'Edit Server'});
+        let { id } = req.params;
+        let { name, endpoint, status } = req.body;
+
+        await connection('servers_listen')
+            .where({ id })
+            .update({name, endpoint, status})
+
+        res.json({name, endpoint, status});
     },
     delete: async (req: Request, res: Response) => {
         let { id } = req.params;

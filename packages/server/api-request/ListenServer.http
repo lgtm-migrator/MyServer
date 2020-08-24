@@ -22,13 +22,11 @@ Content-Type: {{contentType}}
 ###
 
 # @name ServerListen_Edit
-put {{baseUrl}}/server/listen/1 HTTP/1.1
+put {{baseUrl}}/server/listen/6 HTTP/1.1
 Content-Type: {{contentType}}
 
 {
-    "name": "Marcon Willian",
-    "endpoint": "http://localhost:3000",
-    "password": "ServerPass"
+    "status": true
 }
 
 

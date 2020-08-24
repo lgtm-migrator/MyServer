@@ -7,7 +7,7 @@ export async function up(knex: Knex): Promise<any> {
         table.string('name', 50).notNullable();
         table.string('endpoint').notNullable();
         table.string('token').notNullable();
-        table.boolean('status').defaultTo(false).notNullable();
+        table.boolean('status').defaultTo(true).notNullable();
     })
 }
 
