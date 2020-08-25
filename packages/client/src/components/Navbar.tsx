@@ -14,7 +14,7 @@ interface NavbarProps {
 const Navbar: React.FunctionComponent<NavbarProps> = ({location: {pathname}}) => {
     let history = useHistory();
 
-    function handleClick() {
+    function handleLogout() {
         history.push("/login/");
     }
 
@@ -41,7 +41,7 @@ const Navbar: React.FunctionComponent<NavbarProps> = ({location: {pathname}}) =>
                         </ul>
                         <div className="form-inline my-2 my-lg-0 pt-2 pb-2">
                             <Link className="btn btn-outline-info my-2 my-sm-0 btn-sm" to="/servidor/adicionar/">Adicionar Servidor</Link>
-                            <button className="btn btn-outline-danger my-2 my-sm-0 ml-2 btn-sm" onClick={handleClick}>Sair</button>
+                            <button className="btn btn-outline-danger my-2 my-sm-0 ml-2 btn-sm" onClick={handleLogout}>Sair</button>
                         </div>
                     </div>
                 </nav>
