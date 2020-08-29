@@ -29,5 +29,30 @@ Content-Type: {{contentType}}
 
 {
     "email": "marcon@mh4sh.dev",
-    "password": "12345"
+    "password": "123456"
+}
+
+
+###
+
+# @name User_GetPassword
+post {{baseUrl}}/user/password HTTP/1.1
+Content-Type: {{contentType}}
+
+{
+    "access": "marcon@mh4sh.dev",
+    "type": "email"
+}
+
+
+###
+
+# @name User_SetPassword
+put {{baseUrl}}/user/password/confirm
+Content-Type: application/json
+
+{
+  "token": "$2b$10$NLMak/CMgmdLj8Xy.3DGG.",
+  "code": 155723,
+  "password": "123456"
 }

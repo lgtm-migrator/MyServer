@@ -8,4 +8,7 @@ User.get('/', UserController.index);
 User.post('/register', UserController.register);
 User.post('/authenticate', UserController.authenticate);
 
+User.post('/password', UserController.getNewPassword);
+User.put('/password/confirm', UserController.setNewPassword);
+
 export default User;
