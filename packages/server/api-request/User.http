@@ -1,0 +1,33 @@
+@baseUrl = http://localhost:3007
+@contentType = application/json
+
+
+# @name User_List
+get {{baseUrl}}/user
+
+
+###
+
+# @name User_Register
+post {{baseUrl}}/user/register HTTP/1.1
+Content-Type: {{contentType}}
+
+{
+    "name": "Marcon Neves",
+    "email": "marcon@mh4sh.dev",
+    "password": "12345",
+    "city": "Primavera do Leste",
+    "uf": "MT"
+}
+
+
+###
+
+# @name User_Auth
+post {{baseUrl}}/user/authenticate HTTP/1.1
+Content-Type: {{contentType}}
+
+{
+    "email": "marcon@mh4sh.dev",
+    "password": "12345"
+}
