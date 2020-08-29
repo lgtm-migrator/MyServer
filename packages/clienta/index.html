@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PM2 - Painel</title>
+</head>
+<body style="background: #fff; border: 0px; margin: 0px;">
+    <div style="width: 100%; height: 30px; background: yellow; -webkit-app-region: drag"></div>
+    <h1>Lista de Process!</h1>
+    <div>
+        <span>Intervalo de Update em segundos</span>
+        <input type="number" name="update-input" id="update-input" value="30">
+        <button id="update-set" onclick="updateInterval()">Editar</button>
+    </div>
+    <ul></ul>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+    <script src="./script.js"></script>
+    <script>
+        let socket = io("http://localhost:3010", {
+            path: '/socket/process',
+            query: {
+                token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoxLCJpYXQiOjE1OTgyMzA5MzYsImV4cCI6MTU5ODIzNDUzNn0.bkPreAWIfdJy3E8o4XoKDN9u8bGX1iN5FCgIgSXCR7g'
+            }
+        });
+
+        socket.on("process", function(data) {
+            console.log(data);
+            socket.emit("process:list");
+        });
+
+
+        function start(process){
+            socket.emit("process:start", process);
+        }
+        function stop(process){
+            socket.emit("process:stop", process);
+        }
+        function restart(process){
+            socket.emit("process:restart", process);
+        }
+        function deleteProcess(process){
+            socket.emit("process:delete", process);
+        }
+
+        socket.on("process:list", function(data) {
+            App.list(data);
+        })
+
+
+        if(localStorage.getItem('time')){
+            let lastTime = localStorage.getItem('time');
+            document.getElementById('update-input').value = lastTime;
+
+            socket.emit("process:setTime", lastTime);
+        }
+
+        const updateInterval = () => {
+            let newTime = document.getElementById('update-input').value;
+            localStorage.setItem('time', newTime)
+
+            socket.emit("process:setTime", newTime);
+        }
+
+        socket.emit("process:list");
+    </script>
+</body>
+</html>

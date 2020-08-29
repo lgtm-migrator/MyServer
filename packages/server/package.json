@@ -1,6 +1,6 @@
 {
   "name": "@myserver/server",
-  "version": "0.2.2",
+  "version": "0.2.4",
   "description": "Server for project myServer",
   "main": "src/index.ts",
   "repository": "git@github.com:MH4SH/MyServer.git",
