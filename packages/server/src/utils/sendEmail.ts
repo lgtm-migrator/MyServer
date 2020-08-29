@@ -1,50 +1,41 @@
-import sgMail, {MailDataRequired} from '@sendgrid/mail';
+import sgMail, { MailDataRequired } from '@sendgrid/mail';
 
 sgMail.setApiKey(process.env.SENDGRID_API_KEY as string);
 
 interface SendConfig {
-	to: string;
-	subject: string;
-	html: string;
-	text: string;
-}
-
-interface ISendEmail {
-	noReplay({to, subject, html, text}: SendConfig): Promise<void>;
+  to: string;
+  subject: string;
+  html: string;
+  text: string;
 }
 
 interface TemplateMail {
-	html: string;
-	text: string
+  html: string;
+  text: string;
 }
 
-class SendEmail implements ISendEmail {
-	
-	private _header(): TemplateMail {
-		return {
-			html: '<center><h2><strong>Pm2Painel</strong></h2>',
-			text: 'Pm2Painel \n'
-		};
-	}
-	private _footer(): TemplateMail {
-		return {
-			html: '<br /><strong>from Pm2Painel</strong></center>',
-			text: '\n\nfrom Pm2Painel'
-		};
-	}
+class SendEmail {
+  private header: TemplateMail = {
+    html: '<center><h2><strong>MyServer</strong></h2>',
+    text: 'MyServer \n'
+  };
 
-	async noReplay({to, subject, html, text}: SendConfig): Promise<void> {
-		const msg: MailDataRequired = {
-			to,
-			from: 'Pm2Painel <noreply@pm2painel.mh4sh.dev>',
-			subject,
-			text: `${this._header().text}${text}${this._footer().text}`,
-			html: `${this._header().html}${html}${this._footer().html}`,
-		  };
+  private footer: TemplateMail = {
+    html: '<br /><strong>from MyServer</strong></center>',
+    text: '\n\nfrom MyServer'
+  };
 
-		  await sgMail
-		  .send(msg);
-	}
-};
+  async noReplay({ to, subject, html, text }: SendConfig): Promise<void> {
+    const msg: MailDataRequired = {
+      to,
+      from: 'MyServer <noreply@myserver.mh4sh.dev>',
+      subject,
+      text: `${this.header.text}${text}${this.footer.text}`,
+      html: `${this.header.html}${html}${this.footer.html}`
+    };
+
+    await sgMail.send(msg);
+  }
+}
 
 export default SendEmail;
