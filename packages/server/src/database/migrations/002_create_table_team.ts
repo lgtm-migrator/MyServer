@@ -5,7 +5,6 @@ export async function up(knex: Knex): Promise<any> {
   return knex.schema.createTable('team', table => {
     table.increments('id').primary();
     table.integer('name').notNullable();
-    table.integer('plan').notNullable();
   });
 }
 
