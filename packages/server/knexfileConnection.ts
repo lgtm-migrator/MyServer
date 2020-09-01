@@ -2,17 +2,14 @@ import path from 'path';
 
 export default {
   dev: {
-    client: 'sqlite3',
-    connection: {
-      filename: path.resolve(__dirname, 'src', 'database', 'dev.sqlite')
-    },
+    client: 'pg',
+    connection: 'postgresql://postgres:docker@127.0.0.1:5434/myServer',
     migrations: {
       directory: path.resolve(__dirname, 'src', 'database', 'migrations')
     },
     seeds: {
       directory: path.resolve(__dirname, 'src', 'database', 'seeds')
-    },
-    useNullAsDefault: false
+    }
   },
   test: {
     client: 'sqlite3',

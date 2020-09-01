@@ -28,11 +28,13 @@ export default {
 
       body.password = await bcrypt.hash(body.password, 10);
 
-      const [id] = await connection('user').insert({
-        ...body,
-        type: '3',
-        created: new Date()
-      });
+      const [id] = await connection('user').insert(
+        {
+          ...body,
+          type: '3'
+        },
+        'id'
+      );
 
       body.password = undefined;
 

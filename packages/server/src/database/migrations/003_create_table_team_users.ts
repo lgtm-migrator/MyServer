@@ -6,6 +6,9 @@ export async function up(knex: Knex): Promise<any> {
     table.increments('id').primary();
     table.enu('type', [1, 2, 3, 4, 5]).notNullable();
 
+    table.timestamp('created_at').defaultTo('now()');
+    table.timestamp('updated_at').defaultTo('now()');
+
     table.integer('idTeam').unsigned().notNullable();
     table.foreign('idTeam').references('id').inTable('team');
 

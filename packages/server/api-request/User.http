@@ -29,7 +29,7 @@ Content-Type: {{contentType}}
 
 {
     "email": "marcon@mh4sh.dev",
-    "password": "123456"
+    "password": "12345"
 }
 
 
@@ -52,7 +52,7 @@ put {{baseUrl}}/user/password/confirm
 Content-Type: application/json
 
 {
-  "token": "$2b$10$NLMak/CMgmdLj8Xy.3DGG.",
-  "code": 155723,
-  "password": "123456"
+  "token": "$2b$10$PzoqhwNqjwE4BS/cp2EI8O",
+  "code": 428166,
+  "password": "428166"
 }

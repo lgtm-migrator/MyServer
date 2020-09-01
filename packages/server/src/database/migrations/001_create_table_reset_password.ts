@@ -5,8 +5,11 @@ export async function up(knex: Knex): Promise<any> {
   return knex.schema.createTable('reset_password', table => {
     table.increments('id').primary();
     table.integer('idUser').unsigned().notNullable();
-    table.integer('token').notNullable();
-    table.integer('code').notNullable();
+    table.string('token').notNullable();
+    table.string('code').notNullable();
+
+    table.timestamp('created_at').defaultTo('now()');
+    table.timestamp('updated_at').defaultTo('now()');
 
     table.foreign('idUser').references('id').inTable('user');
   });

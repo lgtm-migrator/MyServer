@@ -4,7 +4,10 @@ import * as Knex from 'knex';
 export async function up(knex: Knex): Promise<any> {
   return knex.schema.createTable('team', table => {
     table.increments('id').primary();
-    table.integer('name').notNullable();
+    table.string('name').notNullable();
+
+    table.timestamp('created_at').defaultTo('now()');
+    table.timestamp('updated_at').defaultTo('now()');
   });
 }
 

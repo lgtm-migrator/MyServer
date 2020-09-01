@@ -8,6 +8,9 @@ export async function up(knex: Knex): Promise<any> {
     table.string('endpoint').notNullable();
     table.string('token').notNullable();
     table.boolean('status').defaultTo(true).notNullable();
+
+    table.timestamp('created_at').defaultTo('now()');
+    table.timestamp('updated_at').defaultTo('now()');
   });
 }
 

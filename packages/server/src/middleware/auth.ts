@@ -48,7 +48,7 @@ export default (
       message: 'Token unformatted'
     });
 
-  jwt.verify(token, process.env.HASH_1_SECRET, (err, decoded) => {
+  jwt.verify(token, process.env.HASH_1_SECRET as string, (err, decoded) => {
     if (err)
       return res.status(401).json({
         statusCode: 401,

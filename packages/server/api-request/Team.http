@@ -1,9 +1,10 @@
 @baseUrl = http://localhost:3007
 @contentType = application/json
-
+@tokenAuthorization = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZW1haWwiOiJtYXJjb25AbWg0c2guZGV2IiwidHlwZSI6IjMiLCJpYXQiOjE1OTg5MjE5MjUsImV4cCI6MTU5OTAwODMyNX0.dCVliTyewBIRNvIEVsG22G9yIy7VarZRlF6U3kiSuhQ
 
 # @name Team_List
 get {{baseUrl}}/team
+Authorization: {{tokenAuthorization}}
 
 
 ###
@@ -11,7 +12,8 @@ get {{baseUrl}}/team
 # @name Team_Create
 post {{baseUrl}}/team HTTP/1.1
 Content-Type: {{contentType}}
+Authorization: {{tokenAuthorization}}
 
 {
-    "name": "Marcon Neves"
+    "name": "PagPro"
 }
