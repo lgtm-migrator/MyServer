@@ -18,7 +18,7 @@ export default {
       for await (const team of teams) {
         const members = await connection('team_user')
           .join('user', 'team_user.idUser', 'user.id')
-          .select('user.name', 'team_user.type')
+          .select('user.name', 'team_user.type', 'user.email')
           .where({
             idTeam: team.id
           });
